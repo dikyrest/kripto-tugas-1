@@ -1,10 +1,9 @@
 import React from 'react';
-import '../styles/Sidebar.css';
 
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <h1 className="logo">Logo</h1>
+            <h1 className="logo">Cipher Mania</h1>
             <ul className="nav">
                 <li className="nav-item">
                     <a href="/vigenere-cipher" className="nav-link">Vigenere Cipher</a>

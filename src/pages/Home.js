@@ -1,5 +1,4 @@
 import Sidebar from "../components/Sidebar";
-import "../styles/Layout.css"
 
 const Home = () => {
     return (
@@ -7,9 +6,7 @@ const Home = () => {
             <header className="App-header">
                 <Sidebar />
                 <div className="content-container">
-                    <h1>
-                        Home
-                    </h1>
+                    <h1>Home</h1>
                 </div>
             </header>
         </div>
