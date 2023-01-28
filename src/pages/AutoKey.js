@@ -10,7 +10,7 @@ const AutoKey = () => {
             <Sidebar />
             <div className="content-container">
                 <div className="content-title">
-                    <h1>Auto Key Vigenere Cipher</h1>
+                    <h1>Auto-Key Vigenere Cipher</h1>
                 </div>
                 <div className="section">
                     <div className="section-title">
