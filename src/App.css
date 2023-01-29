@@ -34,9 +34,9 @@
 }
 
 .result-content {
-  display: flex;
+  inline-size: 250px;
+  overflow-wrap: break-word;
   min-height: 20px;
-  flex-direction: column;
   border: 2px solid black;
   margin: 20px;
 }
