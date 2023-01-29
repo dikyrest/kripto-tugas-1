@@ -1,5 +1,6 @@
 from flask import Flask, request
-from auto_key import *
+import auto_key
+import vigenere
 
 
 app = Flask(__name__)
@@ -9,7 +10,8 @@ app = Flask(__name__)
 def vigenere_encrypt():
     key = request.json["key"].upper()
     text = request.json["text"].upper().replace(" ", "")
-    result = encrypt(key, text)
+    result = vigenere.encrypt(key, text)
+    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
     return {
         "result": result
     }
@@ -19,7 +21,7 @@ def vigenere_encrypt():
 def vigenere_decrypt():
     key = request.json["key"].upper()
     text = request.json["text"].upper().replace(" ", "")
-    result = decrypt(key, text)
+    result = vigenere.decrypt(key, text)
     return {
         "result": result
     }
@@ -29,7 +31,8 @@ def vigenere_decrypt():
 def auto_key_encrypt():
     key = request.json["key"].upper()
     text = request.json["text"].upper().replace(" ", "")
-    result = encrypt(key, text)
+    result = auto_key.encrypt(key, text)
+    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
     return {
         "result": result
     }
@@ -39,7 +42,7 @@ def auto_key_encrypt():
 def auto_key_decrypt():
     key = request.json["key"].upper()
     text = request.json["text"].upper().replace(" ", "")
-    result = decrypt(key, text)
+    result = auto_key.decrypt(key, text)
     return {
         "result": result
     }
