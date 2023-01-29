@@ -10,33 +10,66 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <title>Cipher Mania</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <py-script>
+        def vigenere(plaintext, key):
+            """Encrypt plaintext using Vigenere cipher with key."""
+            # filter out non-alphabetic characters from key
+            key = ''.join([char for char in key if char.isalpha()])
+            ciphertext = ''
+            j = 0
+            for i in range(len(plaintext)):
+                if plaintext[i].isalpha():
+                    if plaintext[i].isupper():
+                        ciphertext += shift(plaintext[i], ord(key[j % len(key)].upper()) - ord('A'))
+                    else:
+                        ciphertext += shift(plaintext[i], ord(key[j % len(key)].lower()) - ord('a'))
+                    j += 1
+                else:
+                    ciphertext += plaintext[i]
+            return ciphertext
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        def decrypt(ciphertext, key):
+            """Decrypt ciphertext using Vigenere cipher with key."""
+            # filter out non-alphabetic characters from key
+            key = ''.join([char for char in key if char.isalpha()])
+            plaintext = ''
+            j = 0
+            for i in range(len(ciphertext)):
+                if ciphertext[i].isalpha():
+                    if ciphertext[i].isupper():
+                        plaintext += shift(ciphertext[i], -ord(key[j % len(key)].upper()) + ord('A'))
+                    else:
+                        plaintext += shift(ciphertext[i], -ord(key[j % len(key)].lower()) + ord('a'))
+                    j += 1
+                else:
+                    plaintext += ciphertext[i]
+            return plaintext
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        def shift(char, n):
+            """Shift char by n places."""
+            if char.isupper():
+                return chr((ord(char) - ord('A') + n) % 26 + ord('A'))
+            else:
+                return chr((ord(char) - ord('a') + n) % 26 + ord('a'))
+
+        def display_encipher():
+            """Display the result of the encryption/decryption."""
+            plaintext = js.document.getElementById('plaintext').value
+            key = js.document.getElementById('key-enc').value
+            ciphertext = vigenere(plaintext, key)
+            display(ciphertext, target='result')
+
+        def display_decipher():
+            """Display the result of the encryption/decryption."""
+            ciphertext = js.document.getElementById('ciphertext').value
+            key = js.document.getElementById('key-dec').value
+            plaintext = decrypt(ciphertext, key)
+            display(plaintext, target='result')
+    </py-script>
   </body>
 </html>

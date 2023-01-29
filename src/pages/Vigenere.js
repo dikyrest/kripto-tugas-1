@@ -17,20 +17,20 @@ const Vigenere = () => {
                         <h2>Encipher</h2>
                     </div>
                     <div className="section-content">
-                        <TextBox />
-                        <InputBox placeholder={"key"}/>
+                        <TextBox id="plaintext" />
+                        <InputBox id="key-enc" />
                     </div>
-                    <Button children={"Encrypt"}/>
+                    <Button py-click="display_encipher()" id="encrypt" children={"Encrypt"} />
                 </div>
                 <div className="section">
                     <div className="section-title">
                         <h2>Decipher</h2>
                     </div>
                     <div className="section-content">
-                        <TextBox />
-                        <InputBox placeholder={"key"}/>
+                        <TextBox id="ciphertext" />
+                        <InputBox id="key-dec" />
                     </div>
-                    <Button children={"Decrypt"}/> 
+                    <Button py-click="display_decipher()" id="decrypt" children={"Decrypt"} />
                 </div>
             </div>
             <ResultBox />

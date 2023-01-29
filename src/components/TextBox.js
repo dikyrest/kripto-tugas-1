@@ -1,7 +1,8 @@
-const TextBox = ({ value, placeholder }) => {
+const TextBox = (props) => {
     return (
-        <textarea
-            rows={5}
+        <textarea 
+            {...props}
+            rows={7}
         />
     );
 };

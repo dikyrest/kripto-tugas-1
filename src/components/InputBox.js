@@ -1,10 +1,8 @@
-const InputBox = ({ value, onChange, placeholder }) => {
+const InputBox = (props) => {
     return (
         <input
+            {...props}
             type="text"
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
         />
     );
 };
