@@ -24,7 +24,7 @@ const AutoKey = () => {
             <h2>Encipher</h2>
           </div>
           <div className="section-content">
-            <TextBox id="plaintext" text={plainText} setText={setPlainText} />
+            <TextBox id="code" text={plainText} setText={setPlainText} />
             <InputBox
               id={"key"}
               input={encryptKey}
@@ -44,7 +44,7 @@ const AutoKey = () => {
             <h2>Decipher</h2>
           </div>
           <div className="section-content">
-            <TextBox id="ciphertext" text={cipherText} setText={setCipherText} />
+            <TextBox id="code" text={cipherText} setText={setCipherText} />
             <InputBox
               id={"key"}
               input={decryptKey}
