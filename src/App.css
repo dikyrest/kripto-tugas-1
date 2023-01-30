@@ -74,12 +74,12 @@
 }
 
 .nav a:hover {
-  background-color: #6082B6;
+  background-color: #6082b6;
   color: white;
 }
 
 .nav a.active {
-  background-color: #0047AB;
+  background-color: #0047ab;
   color: white;
 }
 
@@ -92,11 +92,21 @@
 
 #code {
   font-size: 15px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 #key {
   font-size: 15px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   text-transform: uppercase;
+}
+
+.key-section {
+  font-size: 14px;
+  margin: 0;
+}
+
+#affine-a,
+#affine-b {
+  width: 25%;
 }
