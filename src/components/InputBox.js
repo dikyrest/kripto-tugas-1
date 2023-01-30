@@ -1,9 +1,9 @@
-const InputBox = ({ id, input, setInput }) => {
+const InputBox = ({ id, input, setInput, ...props }) => {
   const handleChange = (event) => {
     setInput(event.target.value);
   };
 
-  return <input id={id} onChange={handleChange} type="text" />;
+  return <input id={id} onChange={handleChange} type="text" {...props} />;
 };
 
 export default InputBox;
