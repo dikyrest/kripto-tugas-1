@@ -2,6 +2,7 @@ from flask import Flask, request
 import auto_key
 import vigenere
 import extended
+import affine
 
 
 app = Flask(__name__)
@@ -34,6 +35,7 @@ def auto_key_encrypt():
     text = request.json["text"].upper().replace(" ", "")
     result = auto_key.encrypt(key, text)
     result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
+    print(result)
     return {
         "result": result
     }
@@ -65,6 +67,27 @@ def extended_decrypt():
     key = request.json["key"].upper()
     text = request.json["text"]
     result = extended.decrypt(key, text)
+    return {
+        "result": result
+    }
+
+
+@app.route('/affine/encrypt', methods=['POST'])
+def affine_encrypt():
+    key = request.json["key"].split(";")
+    text = request.json["text"].upper().replace(" ", "")
+    result = affine.encrypt(int(key[0]), int(key[1]), text)
+    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
+    return {
+        "result": result
+    }
+
+
+@app.route('/affine/decrypt', methods=['POST'])
+def affine_decrypt():
+    key = request.json["key"].split(";")
+    text = request.json["text"].upper().replace(" ", "")
+    result = affine.decrypt(int(key[0]), int(key[1]), text)
     return {
         "result": result
     }
