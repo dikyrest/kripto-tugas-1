@@ -102,5 +102,16 @@ def playfair_encrypt():
     }
 
 
+@app.route('/playfair/decrypt', methods=['POST'])
+def playfair_decrypt():
+    key = request.json["key"]
+    key = [[char.upper() for char in row] for row in key]
+    text = re.sub(r'[^a-zA-Z]', '', request.json["text"].upper())
+    result = playfair.decrypt(key, text)
+    return {
+        "result": result
+    }
+
+
 if __name__ == "__main__":
     app.run(debug=True)

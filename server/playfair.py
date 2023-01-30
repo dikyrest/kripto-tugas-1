@@ -11,6 +11,17 @@ def encrypt(key, plaintext):
         ciphertext += encrypt_digraph(digraph, key)
     return ciphertext
 
+def decrypt(key, ciphertext):
+    """Decrypts the ciphertext using the Playfair cipher."""
+    key = np.array(key)
+    # Split the ciphertext into digraphs
+    digraphs = split_into_digraphs(ciphertext)
+    # Decrypt each digraph
+    plaintext = ''
+    for digraph in digraphs:
+        plaintext += decrypt_digraph(digraph, key)
+    return plaintext
+
 def split_into_digraphs(text):
     """Splits the text into digraphs."""
     # Split the characters into digraphs
@@ -48,6 +59,23 @@ def encrypt_digraph(digraph, key):
     else:
         # Encrypt the digraph using the rectangle method
         return encrypt_rectangle(coords, key)
+
+def decrypt_digraph(digraph, key):
+    """Decrypts the digraph using the Playfair cipher."""
+    # Get the coordinates of the digraph
+    coords = [get_coords(char, key) for char in digraph]
+    # If the coordinates are in the same row
+    if coords[0][0] == coords[1][0]:
+        # Decrypt the digraph using the same row
+        return decrypt_same_row(coords, key)
+    # If the coordinates are in the same column
+    elif coords[0][1] == coords[1][1]:
+        # Decrypt the digraph using the same column
+        return decrypt_same_column(coords, key)
+    # If the coordinates are in different rows and columns
+    else:
+        # Decrypt the digraph using the rectangle method
+        return decrypt_rectangle(coords, key)
 
 def get_coords(char, key):
     """Returns the coordinates of the character in the key."""
@@ -94,6 +122,47 @@ def encrypt_rectangle(coords, key):
     # Get the column index of the second character
     col2 = coords[1][1]
     # Get the encrypted characters
+    char1 = key[row1][col2]
+    char2 = key[row2][col1]
+    return char1 + char2
+
+def decrypt_same_row(coords, key):
+    """Decrypts the digraph using the same row method."""
+    # Get the row index
+    row = coords[0][0]
+    # Get the column index of the first character
+    col1 = coords[0][1]
+    # Get the column index of the second character
+    col2 = coords[1][1]
+    # Get the decrypted characters
+    char1 = key[row][(col1 - 1) % 5]
+    char2 = key[row][(col2 - 1) % 5]
+    return char1 + char2
+
+def decrypt_same_column(coords, key):
+    """Decrypts the digraph using the same column method."""
+    # Get the column index
+    col = coords[0][1]
+    # Get the row index of the first character
+    row1 = coords[0][0]
+    # Get the row index of the second character
+    row2 = coords[1][0]
+    # Get the decrypted characters
+    char1 = key[(row1 - 1) % 5][col]
+    char2 = key[(row2 - 1) % 5][col]
+    return char1 + char2
+
+def decrypt_rectangle(coords, key):
+    """Decrypts the digraph using the rectangle method."""
+    # Get the row index of the first character
+    row1 = coords[0][0]
+    # Get the column index of the first character
+    col1 = coords[0][1]
+    # Get the row index of the second character
+    row2 = coords[1][0]
+    # Get the column index of the second character
+    col2 = coords[1][1]
+    # Get the decrypted characters
     char1 = key[row1][col2]
     char2 = key[row2][col1]
     return char1 + char2
