@@ -1,10 +1,19 @@
 import Sidebar from "../components/Sidebar";
 import TextBox from "../components/TextBox";
 import Button from "../components/Button";
-import InputBox from "../components/InputBox";
+import InputMatrix from "../components/InputMatrix";
 import ResultBox from "../components/ResultBox";
+import { useState } from "react";
 
 const Playfair = () => {
+    const [plainText, setPlainText] = useState("");
+    const [cipherText, setCipherText] = useState("");
+    const [matrixDecrypt, setMatrixDecrypt] = useState([[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]]);
+    const [matrixEncrypt, setMatrixEncrypt] = useState([[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]]);
+    const [result, setResult] = useState("");
+
+    console.log(matrixEncrypt);
+
     return (
         <div className="App">
             <Sidebar />
@@ -17,23 +26,39 @@ const Playfair = () => {
                         <h2>Encipher</h2>
                     </div>
                     <div className="section-content">
-                        <TextBox />
-                        <InputBox placeholder={"key"}/>
+                        <TextBox id="code" text={plainText} setText={setPlainText} />
+                        <InputMatrix 
+                            setMatrix={setMatrixEncrypt}
+                        />
                     </div>
-                    <Button children={"Encrypt"}/>
+                    <Button 
+                        endpoint={"/playfair/encrypt"}
+                        text={plainText}
+                        kunci={matrixEncrypt}
+                        setResult={setResult}
+                        children={"Encrypt"}
+                    />
                 </div>
                 <div className="section">
                     <div className="section-title">
                         <h2>Decipher</h2>
                     </div>
                     <div className="section-content">
-                        <TextBox />
-                        <InputBox placeholder={"key"}/>
+                        <TextBox id={"code"} text={cipherText} setText={setCipherText} />
+                        <InputMatrix 
+                            setMatrix={setMatrixDecrypt}
+                        />
                     </div>
-                    <Button children={"Decrypt"}/> 
+                    <Button 
+                        endpoint={"/playfair/decrypt"}
+                        text={cipherText}
+                        kunci={matrixDecrypt}
+                        setResult={setResult}
+                        children={"Decrypt"}
+                    /> 
                 </div>
             </div>
-            <ResultBox />
+            <ResultBox result={result} />
         </div>
     );
 }

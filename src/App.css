@@ -34,7 +34,7 @@
 }
 
 .result-content {
-  inline-size: 250px;
+  inline-size: 16em;
   overflow-wrap: break-word;
   min-height: 20px;
   border: 2px solid black;
@@ -87,7 +87,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-bottom: 20px;
 }
 
 #code {
@@ -109,4 +108,17 @@
 #affine-a,
 #affine-b {
   width: 25%;
+}
+
+.matrix-grid {
+  font-size: 15px;
+}
+
+.cell {
+  font-size: 15px;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  text-align: center;
+  width: 2.15em;
+  height: 2.15em;
 }

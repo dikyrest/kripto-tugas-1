@@ -1,8 +1,10 @@
 from flask import Flask, request
+import re
 import auto_key
 import vigenere
 import extended
 import affine
+import playfair
 
 
 app = Flask(__name__)
@@ -11,9 +13,8 @@ app = Flask(__name__)
 @app.route('/vigenere/encrypt', methods=["POST"])
 def vigenere_encrypt():
     key = request.json["key"].upper()
-    text = request.json["text"].upper().replace(" ", "")
+    text = re.sub(r'[^a-zA-Z]', '', request.json["text"].upper())
     result = vigenere.encrypt(key, text)
-    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
     return {
         "result": result
     }
@@ -22,7 +23,7 @@ def vigenere_encrypt():
 @app.route('/vigenere/decrypt', methods=["POST"])
 def vigenere_decrypt():
     key = request.json["key"].upper()
-    text = request.json["text"].upper().replace(" ", "")
+    text = re.sub(r'[^a-zA-Z]', '', request.json["text"].upper())
     result = vigenere.decrypt(key, text)
     return {
         "result": result
@@ -32,9 +33,8 @@ def vigenere_decrypt():
 @app.route('/autokey/encrypt', methods=["POST"])
 def auto_key_encrypt():
     key = request.json["key"].upper()
-    text = request.json["text"].upper().replace(" ", "")
+    text = re.sub(r'[^a-zA-Z]', '', request.json["text"].upper())
     result = auto_key.encrypt(key, text)
-    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
     print(result)
     return {
         "result": result
@@ -44,7 +44,7 @@ def auto_key_encrypt():
 @app.route('/autokey/decrypt', methods=["POST"])
 def auto_key_decrypt():
     key = request.json["key"].upper()
-    text = request.json["text"].upper().replace(" ", "")
+    text = re.sub(r'[^a-zA-Z]', '', request.json["text"].upper())
     result = auto_key.decrypt(key, text)
     return {
         "result": result
@@ -56,7 +56,6 @@ def extended_encrypt():
     key = request.json["key"].upper()
     text = request.json["text"]
     result = extended.encrypt(key, text)
-    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
     return {
         "result": result
     }
@@ -77,7 +76,6 @@ def affine_encrypt():
     key = request.json["key"].split(";")
     text = request.json["text"].upper().replace(" ", "")
     result = affine.encrypt(int(key[0]), int(key[1]), text)
-    result = " ".join([result[i:i+5] for i in range(0, len(result), 5)])
     return {
         "result": result
     }
@@ -88,6 +86,17 @@ def affine_decrypt():
     key = request.json["key"].split(";")
     text = request.json["text"].upper().replace(" ", "")
     result = affine.decrypt(int(key[0]), int(key[1]), text)
+    return {
+        "result": result
+    }
+
+
+@app.route('/playfair/encrypt', methods=['POST'])
+def playfair_encrypt():
+    key = request.json["key"]
+    key = [[char.upper() for char in row] for row in key]
+    text = re.sub(r'[^a-zA-Z]', '', request.json["text"].upper())
+    result = playfair.encrypt(key, text)
     return {
         "result": result
     }

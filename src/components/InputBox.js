@@ -1,4 +1,4 @@
-const InputBox = ({ id, input, setInput, ...props }) => {
+const InputBox = ({ id, setInput, ...props }) => {
   const handleChange = (event) => {
     setInput(event.target.value);
   };

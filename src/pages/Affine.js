@@ -29,13 +29,11 @@ const Affine = () => {
             <TextBox text={plainText} setText={setPlainText} />
             <span className="key-section">Affine Function Ax+B</span>
             <InputBox
-              input={encryptKeyA}
               setInput={setEncryptKeyA}
               placeholder={"A"}
               id={"affine-a"}
             />
             <InputBox
-              input={encryptKeyB}
               setInput={setEncryptKeyB}
               placeholder={"B"}
               id={"affine-b"}
@@ -56,13 +54,11 @@ const Affine = () => {
           <div className="section-content">
             <TextBox text={cipherText} setText={setCipherText} />
             <InputBox
-              input={decryptKeyA}
               setInput={setDecryptKeyA}
               placeholder={"A"}
               id={"affine-a"}
             />
             <InputBox
-              input={decryptKeyB}
               setInput={setDecryptKeyB}
               placeholder={"B"}
               id={"affine-b"}

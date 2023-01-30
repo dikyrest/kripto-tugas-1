@@ -3,7 +3,7 @@ const TextBox = ({id, text, setText}) => {
     setText(event.target.value);
   };
 
-  return <textarea id={id} onChange={handleChange} rows={7} />;
+  return <textarea id={id} onChange={handleChange} rows={7} value={text} />;
 };
 
 export default TextBox;

@@ -27,8 +27,8 @@ const Extended = () => {
                         <TextBox id="code" text={plainText} setText={setPlainText} />
                         <InputBox 
                             id={"key"}
-                            input={encryptKey}
                             setInput={setEncryptKey}
+                            placeholder={"Key"}
                         />
                     </div>
                     <Button 
@@ -47,8 +47,8 @@ const Extended = () => {
                         <TextBox id="code" text={cipherText} setText={setCipherText} />
                         <InputBox 
                             id={"key"}
-                            input={decryptKey}
                             setInput={setDecryptKey}
+                            placeholder={"Key"}
                         />
                     </div>
                     <Button 
