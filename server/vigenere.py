@@ -7,8 +7,5 @@ def encrypt(key, plainText):
 def decrypt(key, cipherText):
     plainText = ""
     for x in range(len(cipherText)):
-        if(x < len(key)):
-            plainText += chr(65 + (ord(cipherText[x]) - ord(key[x % len(key)])) % 26)
-        else:
-            plainText += chr(65 + (ord(cipherText[x]) - ord(plainText[x-len(key)])) % 26)
+        plainText += chr(65 + (ord(cipherText[x]) - ord(key[x % len(key)])) % 26)
     return plainText
