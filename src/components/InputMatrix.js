@@ -1,4 +1,4 @@
-const InputMatrix = ({ setMatrix }) => {
+const InputMatrix = ({ setMatrix, size, maxLength }) => {
     const handleChange = (e) => {
         const { value, id } = e.target;
         const [row, col] = id.split(",");
@@ -9,19 +9,46 @@ const InputMatrix = ({ setMatrix }) => {
         });
     }
 
+    const listFirstRow = []
+    for (let i = 0; i < size; i++){
+        listFirstRow.push(<th>{i+1}</th>)
+    }
+
+    const listMatrix = []
+    for (let i = 0; i < size; i++){
+        const listTile = []
+        for(let j = 0; j < size; j++){
+            listTile.push(<td><input id={i + "," + j} className="cell" onChange={handleChange} type="text" maxLength={maxLength} /></td>)
+        }
+        listMatrix.push(
+          <tr>
+            <th>{i + 1}</th>
+            {listTile.map((tile) => tile)}
+          </tr>
+        );
+    }
+
+
     return (
         <div className="matrix-grid">
             <table>
                 <tbody>
                     <tr>
                         <th>\</th>
-                        <th>1</th>
+                        {
+                            listFirstRow.map((col) => col)
+                        }
+                        
+                        {/* <th>1</th>
                         <th>2</th>
                         <th>3</th>
                         <th>4</th>
-                        <th>5</th>
+                        <th>5</th> */}
                     </tr>
-                    <tr>
+                    {
+                        listMatrix.map((m) => m)
+                    }
+                    {/* <tr>
                         <th>1</th>
                         <td>
                             <input id="0,0" className="cell" onChange={handleChange} type="text" maxLength={1} />
@@ -110,7 +137,7 @@ const InputMatrix = ({ setMatrix }) => {
                         <td>
                             <input id="4,4" className="cell" onChange={handleChange} type="text" maxLength={1} />
                         </td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </table>
         </div>

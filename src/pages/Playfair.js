@@ -53,6 +53,8 @@ const Playfair = () => {
                         <TextBox id="code" text={plainText} setText={setPlainText} />
                         <InputMatrix 
                             setMatrix={setMatrixEncrypt}
+                            size={5}
+                            maxLength={1}
                         />
                     </div>
                     <InputFile setInput={setPlainTextFile} />
@@ -72,6 +74,8 @@ const Playfair = () => {
                         <TextBox id={"code"} text={cipherText} setText={setCipherText} />
                         <InputMatrix 
                             setMatrix={setMatrixDecrypt}
+                            size={5}
+                            maxLength={1}
                         />
                     </div>
                     <InputFile setInput={setCipherTextFile} />
