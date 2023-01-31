@@ -114,9 +114,9 @@
   margin: 0;
 }
 
-#affine-a,
-#affine-b {
-  width: 25%;
+.affine-a,
+.affine-b {
+  width: 10%;
 }
 
 .matrix-grid {
@@ -130,4 +130,8 @@
   text-align: center;
   width: 2.15em;
   height: 2.15em;
+}
+
+.matrix-input-size{
+  width: 5%
 }
