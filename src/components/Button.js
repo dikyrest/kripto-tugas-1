@@ -1,7 +1,7 @@
 import "../styles/Button.css";
 import axios from "axios";
 
-const Button = ({ children, endpoint, text, kunci, setResult }) => {
+const ActionButton = ({ children, endpoint, text, kunci, setResult }) => {
   console.log(text);
   const handleClick = () => {
     axios.post(endpoint, { key: kunci, text }).then((res) => {
@@ -12,4 +12,4 @@ const Button = ({ children, endpoint, text, kunci, setResult }) => {
   return <button onClick={handleClick}>{children}</button>;
 };
 
-export default Button;
+export default ActionButton;
