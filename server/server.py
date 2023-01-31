@@ -124,5 +124,17 @@ def hill_encrypt():
         "result": result
     }
 
+
+@app.route('/hill/decrypt', methods=["POST"])
+def hill_encrypt():
+    text = request.json["text"].upper().replace(" ", "")
+    key = request.json["key"]
+    key = hill.convertMatriks(len(key), key)
+    result = hill.decrypt(len(key), key, text)
+    print(result)
+    return {
+        "result": result
+    }
+
 if __name__ == "__main__":
     app.run(debug=True)
