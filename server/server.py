@@ -5,6 +5,7 @@ import vigenere
 import extended
 import affine
 import playfair
+import hill
 
 
 app = Flask(__name__)
@@ -112,6 +113,16 @@ def playfair_decrypt():
         "result": result
     }
 
+@app.route('/hill/encrypt', methods=["POST"])
+def hill_encrypt():
+    text = request.json["text"].upper().replace(" ", "")
+    key = request.json["key"]
+    key = hill.convertMatriks(len(key), key)
+    result = hill.encrypt(len(key), key, text)
+    print(result)
+    return {
+        "result": result
+    }
 
 if __name__ == "__main__":
     app.run(debug=True)
