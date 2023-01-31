@@ -31,12 +31,14 @@ const Affine = () => {
             <InputBox
               setInput={setEncryptKeyA}
               placeholder={"A"}
-              id={"affine-a"}
+              className={"affine-a"}
+              type={"number"}
             />
             <InputBox
               setInput={setEncryptKeyB}
               placeholder={"B"}
-              id={"affine-b"}
+              className={"affine-b"}
+              type={"number"}
             />
           </div>
           <Button
@@ -56,12 +58,14 @@ const Affine = () => {
             <InputBox
               setInput={setDecryptKeyA}
               placeholder={"A"}
-              id={"affine-a"}
+              className={"affine-a"}
+              type={"number"}
             />
             <InputBox
               setInput={setDecryptKeyB}
               placeholder={"B"}
-              id={"affine-b"}
+              className={"affine-b"}
+              type={"number"}
             />
           </div>
           <Button
