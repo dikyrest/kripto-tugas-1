@@ -126,7 +126,7 @@ def hill_encrypt():
 
 
 @app.route('/hill/decrypt', methods=["POST"])
-def hill_encrypt():
+def hill_decrypt():
     text = request.json["text"].upper().replace(" ", "")
     key = request.json["key"]
     key = hill.convertMatriks(len(key), key)
