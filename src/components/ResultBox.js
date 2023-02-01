@@ -10,7 +10,7 @@ const ResultBox = ({result}) => {
         {result}
       </div>
       <div className="action-container">
-        <DownloadButton text={result} />
+        <DownloadButton result={result} />
         <CopyToClipboard text={result} onCopy={() => {alert("Result copied to clipboard")}}>
           <button className="copy-button"><AiOutlineCopy /></button>
         </CopyToClipboard>
