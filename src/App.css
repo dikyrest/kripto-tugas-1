@@ -110,8 +110,9 @@
 }
 
 .key-section {
-  font-size: 14px;
-  margin: 0;
+  font-size: 15px;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .affine-a,
