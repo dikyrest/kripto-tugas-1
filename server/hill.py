@@ -33,7 +33,7 @@ def decrypt(size, matriks, cipherText):
 
     adjointMatriks = (np.linalg.inv(matriks).T *
                       np.linalg.det(matriks)).round().transpose()
-    equivalenDeterminan = pow(int(np.linalg.det(matriks)), -1, 26)
+    equivalenDeterminan = pow(int(np.linalg.det(matriks).round()), -1, 26)
     inverseMatriks = (adjointMatriks * equivalenDeterminan) % 26
     print(inverseMatriks)
 
@@ -61,10 +61,15 @@ if (__name__) == "__main__":
     size = int(input("Masukkan ukuran matriks: "))
     arr = []
     for x in range(size):
+        temp = []
         for y in range(size):
-            arr.append(int(input("Masukkan elemen ke-" + str(x*3 + y) + ": ")))
-    matriks = createMatriks(size, arr)
+            temp.append(
+                int(input("Masukkan elemen ke-" + str(x*3 + y) + ": ")))
+        arr.append(temp)
+    matriks = convertMatriks(size, arr)
     print(matriks)
+    print(np.linalg.det(matriks).round())
+    print(decrypt(3, matriks, plainText))
     #print(decrypt(size, matriks, plainText))
     # cofactor = np.linalg.inv(matriks).T * np.linalg.det(matriks)
     # cofactor = cofactor.round()
