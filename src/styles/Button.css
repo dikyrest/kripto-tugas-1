@@ -1,15 +1,47 @@
 button {
-    background-color: #6082B6;
-    border: none;
-    border-radius: 15px;
-    color: white;
-    padding: 12px 32px;
+    color: black;
+    padding: 12px 24px;
     margin: 20px 0 20px 0;
     text-align: center;
     font-size: 16px;
 }
 
 button:hover {
-    background-color: #0047AB;
     cursor: pointer;
+}
+
+.button-ghost {
+    background-color: transparent;
+    padding: 12px 15px;
+    margin: 0;
+    border-radius: 50%;
+    border: none;
+    color: #0047AB;
+}
+
+.button-ghost:hover {
+    background-color: #0047AB;
+    color: white;
+}
+
+.button-outline {
+    background-color: transparent;
+    border: 2px solid #0047AB;
+    color: #0047AB;
+}
+
+.button-outline:hover {
+    background-color: #0047AB;
+    color: white;
+}
+
+.button-solid:hover {
+    background-color: #0047AB;
+}
+
+.button-solid {
+    border-radius: 15px;
+    background-color: #6082B6;
+    border: none;
+    color: white;
 }

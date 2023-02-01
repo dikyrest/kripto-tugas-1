@@ -2,38 +2,42 @@ import Sidebar from "../components/Sidebar";
 import TextBox from "../components/TextBox";
 import Button from "../components/Button";
 import InputBox from "../components/InputBox";
-import InputFile from "../components/InputFile";
+import Brick from "../components/Brick";
 import ResultBox from "../components/ResultBox";
 import { useEffect, useState } from "react";
+import { FileUploader } from "react-drag-drop-files";
 
 const Extended = () => {
     const [encryptKey, setEncryptKey] = useState("");
     const [decryptKey, setDecryptKey] = useState("");
     const [plainText, setPlainText] = useState("");
     const [cipherText, setCipherText] = useState("");
-    const [PlainTextFile, setPlainTextFile] = useState(null);
-    const [CipherTextFile, setCipherTextFile] = useState(null);
+    const [isTextEncipher, setIsTextEncipher] = useState(true);
+    const [isTextDecipher, setIsTextDecipher] = useState(true);
+    const [plainTextFile, setPlainTextFile] = useState(null);
+    const [cipherTextFile, setCipherTextFile] = useState(null);
+    const [fileType, setFileType] = useState("text/plain");
     const [result, setResult] = useState("");
 
     useEffect(() => {
-        if (PlainTextFile) {
+        if (plainTextFile) {
             const reader = new FileReader();
-            reader.onload = (e) => {
-                setPlainText(e.target.result);
-            }
-            reader.readAsText(PlainTextFile);
+            reader.readAsBinaryString(plainTextFile);
+            reader.onload = () => {
+                setPlainText(reader.result);
+            };
         }
-    }, [PlainTextFile]);
+    }, [plainTextFile]);
 
     useEffect(() => {
-        if (CipherTextFile) {
+        if (cipherTextFile) {
             const reader = new FileReader();
-            reader.onload = (e) => {
-                setCipherText(e.target.result);
-            }
-            reader.readAsText(CipherTextFile);
+            reader.readAsBinaryString(cipherTextFile);
+            reader.onload = () => {
+                setCipherText(reader.result);
+            };
         }
-    }, [CipherTextFile]);
+    }, [cipherTextFile]);
 
     return (
         <div className="App">
@@ -43,19 +47,35 @@ const Extended = () => {
                     <h1>Extended Vigenere Cipher</h1>
                 </div>
                 <div className="section">
-                    <div className="section-title">
+                    <div className="section-header">
                         <h2>Encipher</h2>
+                        <Brick setType={setIsTextEncipher} />
                     </div>
                     <div className="section-content">
-                        <TextBox id="code" text={plainText} setText={setPlainText} />
-                        <InputBox 
+                    {
+                        isTextEncipher ? (
+                            <TextBox id="code" text={plainText} setText={setPlainText} />
+                        ) : (
+                            <div className="file-uploader">
+                            <FileUploader
+                                id="file"
+                                handleChange={(file) => {
+                                    console.log(file);
+                                    setPlainTextFile(file);
+                                    setFileType(file["type"]);
+                                }}
+                            />
+                            </div>
+                        )
+                    }
+                        <InputBox
                             id={"key"}
                             setInput={setEncryptKey}
                             placeholder={"Key"}
                         />
                     </div>
-                    <InputFile setInput={setPlainTextFile} />
                     <Button 
+                        className="button-solid"
                         endpoint={"/extended/encrypt"}
                         kunci={encryptKey}
                         text={plainText}
@@ -64,19 +84,35 @@ const Extended = () => {
                     />
                 </div>
                 <div className="section">
-                    <div className="section-title">
+                    <div className="section-header">
                         <h2>Decipher</h2>
+                        <Brick setType={setIsTextDecipher} />
                     </div>
                     <div className="section-content">
-                        <TextBox id="code" text={cipherText} setText={setCipherText} />
-                        <InputBox 
+                    {
+                        isTextDecipher ? (
+                            <TextBox id="code" text={cipherText} setText={setCipherText} />
+                        ) : (
+                            <div className="file-uploader">
+                                <FileUploader
+                                    id="file"
+                                    handleChange={(file) => {
+                                        console.log(file);
+                                        setCipherTextFile(file);
+                                        setFileType("dec");
+                                    }
+                                } />
+                            </div>
+                        )
+                    }
+                        <InputBox
                             id={"key"}
                             setInput={setDecryptKey}
                             placeholder={"Key"}
                         />
                     </div>
-                    <InputFile setInput={setCipherTextFile} />
                     <Button 
+                        className="button-solid"
                         endpoint={"/extended/decrypt"}
                         kunci={decryptKey}
                         text={cipherText}
@@ -85,7 +121,7 @@ const Extended = () => {
                     /> 
                 </div>
             </div>
-            <ResultBox result={result} />
+            <ResultBox result={result} type={fileType} />
         </div>
     );
 }
