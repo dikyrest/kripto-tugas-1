@@ -3,7 +3,7 @@ import numpy as np
 
 def encrypt(pengali, pergeseran, plainText):
     if(np.gcd(pengali, 26) != 1):
-        return "Pengali tidak valid!"
+        return "Nilai A harus relatif prima terhadap 26!"
     cipherText = ""
     for x in range(len(plainText)):
         cipherText += chr(65 +
@@ -13,7 +13,7 @@ def encrypt(pengali, pergeseran, plainText):
 
 def decrypt(pengali, pergeseran, cipherText):
     if(np.gcd(pengali, 26) != 1):
-        return "Pengali tidak valid!"
+        return "Nilai A harus relatif prima terhadap 26!"
     plainText = ""
     inversePengali = pow(pengali, -1, 26)
     for x in range(len(cipherText)):
