@@ -20,11 +20,3 @@ def decrypt(key, cipherText):
     return plainText
 
 
-# if (__name__) == "__main__":
-#     plainText = input("Masukkan plaintext: ")
-#     plainText = plainText.replace(" ", "").upper()
-#     initialKey = input("Masukkan initial key: ").upper()
-#     key = autoKey(initialKey, plainText)
-#     cipher = encrypt(key, plainText)
-#     print(cipher)
-#     print(decrypt(key, cipher))

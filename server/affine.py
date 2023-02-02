@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def encrypt(pengali, pergeseran, plainText):
     if(np.gcd(pengali, 26) != 1):
         return "Nilai A harus relatif prima terhadap 26!"
@@ -22,10 +21,4 @@ def decrypt(pengali, pergeseran, cipherText):
     return plainText
 
 
-# if (__name__) == "__main__":
-#     plainText = input("Masukkan plaintext: ").upper().replace(" ", "")
-#     pengali = int(input("Masukkan nilai m: "))
-#     pergeseran = int(input("Masukkan pergeseran: "))
-#     cipher = encrypt(pengali, pergeseran, plainText)
-#     print(cipher)
-#     print(decrypt(pengali, pergeseran, cipher))
+
