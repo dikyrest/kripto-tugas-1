@@ -1,6 +1,6 @@
 import Sidebar from "../components/Sidebar";
 import TextBox from "../components/TextBox";
-import Button from "../components/Button";
+import FileButton from "../components/FileButton";
 import InputBox from "../components/InputBox";
 import Brick from "../components/Brick";
 import ResultBox from "../components/ResultBox";
@@ -16,13 +16,19 @@ const Extended = () => {
     const [isTextDecipher, setIsTextDecipher] = useState(true);
     const [plainTextFile, setPlainTextFile] = useState(null);
     const [cipherTextFile, setCipherTextFile] = useState(null);
+    const [fileType, setFileType] = useState("text/plain");
+    const [plainTextFileType, setPlainTextFileType] = useState("text/plain");
+    const [cipherTextFileType, setCipherTextFileType] = useState("text/plain");
     const [result, setResult] = useState("");
+
+    console.log(cipherText);
 
     useEffect(() => {
         if (plainTextFile) {
             const reader = new FileReader();
             reader.readAsBinaryString(plainTextFile);
             reader.onload = () => {
+                setPlainTextFileType(plainTextFile.type);
                 setPlainText(reader.result);
             };
         }
@@ -31,8 +37,9 @@ const Extended = () => {
     useEffect(() => {
         if (cipherTextFile) {
             const reader = new FileReader();
-            reader.readAsText(cipherTextFile);
+            reader.readAsBinaryString(cipherTextFile);
             reader.onload = () => {
+                setCipherTextFileType(cipherTextFile.type);
                 setCipherText(reader.result);
             };
         }
@@ -60,7 +67,7 @@ const Extended = () => {
                                 id="file"
                                 handleChange={(file) => {
                                     // console.log(file);
-                                    setPlainTextFile(file);;
+                                    setPlainTextFile(file);
                                 }}
                             />
                             </div>
@@ -72,12 +79,14 @@ const Extended = () => {
                             placeholder={"Key"}
                         />
                     </div>
-                    <Button 
+                    <FileButton 
                         className="button-solid"
                         endpoint={"/extended/encrypt"}
                         kunci={encryptKey}
                         text={plainText}
                         setResult={setResult}
+                        type={plainTextFileType}
+                        setType={setFileType}
                         children={"Encrypt"}
                     />
                 </div>
@@ -108,17 +117,19 @@ const Extended = () => {
                             placeholder={"Key"}
                         />
                     </div>
-                    <Button 
+                    <FileButton 
                         className="button-solid"
                         endpoint={"/extended/decrypt"}
                         kunci={decryptKey}
                         text={cipherText}
                         setResult={setResult}
+                        type={cipherTextFileType}
+                        setType={setFileType}
                         children={"Decrypt"}
                     /> 
                 </div>
             </div>
-            <ResultBox result={result} />
+            <ResultBox result={result} type={fileType}  />
         </div>
     );
 }

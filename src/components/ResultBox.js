@@ -19,7 +19,7 @@ const ResultBox = ({ result, type }) => {
   return (
     <div className="result-container">
       <h1 className="result-title">Result</h1>
-      <DownloadButton result={result} type={type} />
+      <DownloadButton result={result} fileType={type} />
       <CheckBox setIsGrouped={setIsGrouped} />
       <div className="result-content" id="code">
         {finalResult}

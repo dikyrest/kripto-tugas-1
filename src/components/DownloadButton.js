@@ -1,11 +1,12 @@
 import Button from "./Button";
 import { AiOutlineDownload } from "react-icons/ai";
 
-const DownloadButton = ({ result }) => {
+const DownloadButton = ({ result, fileType }) => {
     return (
         <Button onClick={() => {
-            const buffer = Uint8Array.from(Array.from(result).map(letter => letter.charCodeAt(0)));
-            const file = new Blob([buffer], { type: "text/plain" });
+            console.log({"result": result, "fileType": fileType});
+            const buffer = Uint8Array.from(result, c => c.charCodeAt(0));
+            const file = new Blob([buffer], { type: fileType });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(file);
             link.download = "result";
