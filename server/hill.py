@@ -56,23 +56,4 @@ def decrypt(size, matriks, cipherText):
     return plainText
 
 
-if (__name__) == "__main__":
-    plainText = input("Masukkan plainText: ").upper().replace(" ", "")
-    size = int(input("Masukkan ukuran matriks: "))
-    arr = []
-    for x in range(size):
-        temp = []
-        for y in range(size):
-            temp.append(
-                int(input("Masukkan elemen ke-" + str(x*3 + y) + ": ")))
-        arr.append(temp)
-    matriks = convertMatriks(size, arr)
-    print(matriks)
-    print(np.linalg.det(matriks).round())
-    print(decrypt(3, matriks, plainText))
-    #print(decrypt(size, matriks, plainText))
-    # cofactor = np.linalg.inv(matriks).T * np.linalg.det(matriks)
-    # cofactor = cofactor.round()
-    # perDet = pow(int(np.linalg.det(matriks)), -1, 26)
-    # print("determinant: ", np.linalg.det(matriks))
-    # print((cofactor * perDet) % 26)
+
