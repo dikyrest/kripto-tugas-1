@@ -9,11 +9,11 @@ const ResultBox = ({ result, type }) => {
     finalResult = result;
   } else if (isGrouped && result) {
     let list = String(result).match(/.{1,5}/g);
-    console.log(list);
+    // console.log(list);
     list.forEach((element) => {
       finalResult += element + " "
     });
-    console.log(finalResult);
+    // console.log(finalResult);
   }
 
   return (

@@ -16,7 +16,6 @@ const Extended = () => {
     const [isTextDecipher, setIsTextDecipher] = useState(true);
     const [plainTextFile, setPlainTextFile] = useState(null);
     const [cipherTextFile, setCipherTextFile] = useState(null);
-    const [fileType, setFileType] = useState("text/plain");
     const [result, setResult] = useState("");
 
     useEffect(() => {
@@ -32,7 +31,7 @@ const Extended = () => {
     useEffect(() => {
         if (cipherTextFile) {
             const reader = new FileReader();
-            reader.readAsBinaryString(cipherTextFile);
+            reader.readAsText(cipherTextFile);
             reader.onload = () => {
                 setCipherText(reader.result);
             };
@@ -60,9 +59,8 @@ const Extended = () => {
                             <FileUploader
                                 id="file"
                                 handleChange={(file) => {
-                                    console.log(file);
-                                    setPlainTextFile(file);
-                                    setFileType(file["type"]);
+                                    // console.log(file);
+                                    setPlainTextFile(file);;
                                 }}
                             />
                             </div>
@@ -97,9 +95,8 @@ const Extended = () => {
                                 <FileUploader
                                     id="file"
                                     handleChange={(file) => {
-                                        console.log(file);
-                                        setCipherTextFile(file);
-                                        setFileType("dec");
+                                        // console.log(file);
+                                        setCipherTextFile(file);;
                                     }
                                 } />
                             </div>
@@ -121,7 +118,7 @@ const Extended = () => {
                     /> 
                 </div>
             </div>
-            <ResultBox result={result} type={fileType} />
+            <ResultBox result={result} />
         </div>
     );
 }

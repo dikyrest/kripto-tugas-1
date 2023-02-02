@@ -12,7 +12,7 @@ const Playfair = () => {
     const [matrixEncrypt, setMatrixEncrypt] = useState([[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]]);
     const [result, setResult] = useState("");
 
-    console.log(matrixEncrypt);
+    // console.log(matrixEncrypt);
 
     return (
         <div className="App">

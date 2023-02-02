@@ -1,7 +1,7 @@
 const CheckBox = ({setIsGrouped}) => {
     const onChangeCheckbox = (e) => {
         setIsGrouped(e.target.checked)
-        console.log(e.target.checked)
+        // console.log(e.target.checked)
     }
     return (
       <div>
