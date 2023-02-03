@@ -33,7 +33,10 @@ def decrypt(size, matriks, cipherText):
 
     adjointMatriks = (np.linalg.inv(matriks).T *
                       np.linalg.det(matriks)).round().transpose()
-    equivalenDeterminan = pow(int(np.linalg.det(matriks).round()), -1, 26)
+    determinan = int(np.linalg.det(matriks).round())
+    if(determinan == 0 or determinan % 2 == 0 or determinan % 13 == 0):
+        return "Matriks tidak invertible dengan mod 26"
+    equivalenDeterminan = pow(determinan, -1, 26)
     inverseMatriks = (adjointMatriks * equivalenDeterminan) % 26
     print(inverseMatriks)
 
@@ -46,8 +49,6 @@ def decrypt(size, matriks, cipherText):
             for j in range(paddingNeeded):
                 i += "A"
         for k in range(size - paddingNeeded):
-            # if paddingNeeded != 0:
-
             temp = 0
             for l in range(size):
                 temp += inverseMatriks[k][l] * (ord(i[l]) - 65)
