@@ -3,14 +3,37 @@ import TextBox from "../components/TextBox";
 import Button from "../components/Button";
 import InputBox from "../components/InputBox";
 import ResultBox from "../components/ResultBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FileUploader } from "react-drag-drop-files";
 
 const AutoKey = () => {
   const [encryptKey, setEncryptKey] = useState("");
   const [decryptKey, setDecryptKey] = useState("");
   const [plainText, setPlainText] = useState("");
   const [cipherText, setCipherText] = useState("");
+  const [plainTextFile, setPlainTextFile] = useState(null);
+  const [cipherTextFile, setCipherTextFile] = useState(null);
   const [result, setResult] = useState("");
+
+  useEffect(() => {
+    if (plainTextFile) {
+      const reader = new FileReader();
+      reader.readAsText(plainTextFile);
+      reader.onload = () => {
+          setPlainText(reader.result);
+      };
+    }
+  }, [plainTextFile]);
+
+  useEffect(() => {
+    if (cipherTextFile) {
+      const reader = new FileReader();
+      reader.readAsText(cipherTextFile);
+      reader.onload = () => {
+          setCipherText(reader.result);
+      };
+    }
+  }, [cipherTextFile]);
 
   return (
     <div className="App">
@@ -25,6 +48,13 @@ const AutoKey = () => {
           </div>
           <div className="section-content">
             <TextBox id="code" text={plainText} setText={setPlainText} />
+            <FileUploader
+              id="file"
+              handleChange={(file) => {
+                  // console.log(file);
+                  setPlainTextFile(file);
+              }}
+            />
             <InputBox
               id={"key"}
               setInput={setEncryptKey}
@@ -46,6 +76,13 @@ const AutoKey = () => {
           </div>
           <div className="section-content">
             <TextBox id="code" text={cipherText} setText={setCipherText} />
+            <FileUploader
+              id="file"
+              handleChange={(file) => {
+                  // console.log(file);
+                  setCipherTextFile(file);
+              }}
+            />
             <InputBox
               id={"key"}
               setInput={setDecryptKey}
@@ -62,7 +99,7 @@ const AutoKey = () => {
           />
         </div>
       </div>
-      <ResultBox result={result} />
+      <ResultBox result={result} type={"text/plain"} />
     </div>
   );
 };

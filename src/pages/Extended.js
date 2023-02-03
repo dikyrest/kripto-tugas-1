@@ -2,7 +2,6 @@ import Sidebar from "../components/Sidebar";
 import TextBox from "../components/TextBox";
 import FileButton from "../components/FileButton";
 import InputBox from "../components/InputBox";
-import Brick from "../components/Brick";
 import ResultBox from "../components/ResultBox";
 import { useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
@@ -12,8 +11,6 @@ const Extended = () => {
     const [decryptKey, setDecryptKey] = useState("");
     const [plainText, setPlainText] = useState("");
     const [cipherText, setCipherText] = useState("");
-    const [isTextEncipher, setIsTextEncipher] = useState(true);
-    const [isTextDecipher, setIsTextDecipher] = useState(true);
     const [plainTextFile, setPlainTextFile] = useState(null);
     const [cipherTextFile, setCipherTextFile] = useState(null);
     const [fileType, setFileType] = useState("text/plain");
@@ -21,7 +18,8 @@ const Extended = () => {
     const [cipherTextFileType, setCipherTextFileType] = useState("text/plain");
     const [result, setResult] = useState("");
 
-    console.log(cipherText);
+    // console.log(cipherText);
+    // console.log(isTextEncipher);
 
     useEffect(() => {
         if (plainTextFile) {
@@ -55,24 +53,16 @@ const Extended = () => {
                 <div className="section">
                     <div className="section-header">
                         <h2>Encipher</h2>
-                        <Brick setType={setIsTextEncipher} />
                     </div>
                     <div className="section-content">
-                    {
-                        isTextEncipher ? (
-                            <TextBox id="code" text={plainText} setText={setPlainText} />
-                        ) : (
-                            <div className="file-uploader">
-                            <FileUploader
-                                id="file"
-                                handleChange={(file) => {
-                                    // console.log(file);
-                                    setPlainTextFile(file);
-                                }}
-                            />
-                            </div>
-                        )
-                    }
+                        <TextBox id="code" text={plainText} setText={setPlainText} />
+                        <FileUploader
+                            id="file"
+                            handleChange={(file) => {
+                                // console.log(file);
+                                setPlainTextFile(file);
+                            }}
+                        />
                         <InputBox
                             id={"key"}
                             setInput={setEncryptKey}
@@ -93,24 +83,16 @@ const Extended = () => {
                 <div className="section">
                     <div className="section-header">
                         <h2>Decipher</h2>
-                        <Brick setType={setIsTextDecipher} />
                     </div>
                     <div className="section-content">
-                    {
-                        isTextDecipher ? (
-                            <TextBox id="code" text={cipherText} setText={setCipherText} />
-                        ) : (
-                            <div className="file-uploader">
-                                <FileUploader
-                                    id="file"
-                                    handleChange={(file) => {
-                                        // console.log(file);
-                                        setCipherTextFile(file);;
-                                    }
-                                } />
-                            </div>
-                        )
-                    }
+                        <TextBox id="code" text={cipherText} setText={setCipherText} />
+                        <FileUploader
+                            id="file"
+                            handleChange={(file) => {
+                                // console.log(file);
+                                setCipherTextFile(file);
+                            }
+                        } />
                         <InputBox
                             id={"key"}
                             setInput={setDecryptKey}

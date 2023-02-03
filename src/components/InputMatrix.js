@@ -28,7 +28,6 @@ const InputMatrix = ({ setMatrix, size, maxLength }) => {
         );
     }
 
-
     return (
         <div className="matrix-grid">
             <table>

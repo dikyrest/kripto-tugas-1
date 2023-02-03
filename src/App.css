@@ -135,27 +135,6 @@
   width: 5%
 }
 
-.brick {
-  display: flex;
-  gap: 10px;
-}
-
-.file-uploader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.preview {
-  background-color: white;
-  display: flex;
-  text-overflow: ellipsis;
-  color: black;
-  font-size: 15px;
-  max-width: 50vh;
-}
-
 #checkbox{
   font-size: 15px;
 }

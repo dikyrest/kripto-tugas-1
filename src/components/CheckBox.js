@@ -5,8 +5,10 @@ const CheckBox = ({setIsGrouped}) => {
     }
     return (
       <div>
+        <label id="checkbox">
         <input type="checkbox" name="res" value="space" onChange={onChangeCheckbox} />
-        <label for="res" id="checkbox">Space every 5 character</label>
+        Space every 5 character
+        </label>
       </div>
     );
 }
